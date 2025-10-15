@@ -143,6 +143,52 @@
       transform: translateY(0);
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     }
+	/* --- Картки зі статтями про заварювання --- */
+.tea-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tea-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.tea-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+.tea-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(86,26,38,0.25);
+}
+
+.tea-card .card-title {
+  color: #561a26;
+  font-weight: 600;
+}
+
+.tea-card .card-body {
+  background-color: #fffaf9;
+}
+/* Підказка при наведенні на картку */
+.tea-card:hover .card-body {
+  background-color: #fff4f2;
+}
+
+.tea-card .text-muted {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.tea-card:hover .text-muted {
+  opacity: 1;
+}
+
   </style>
 </head>
 <body>
@@ -176,15 +222,50 @@
   </section>
 
   <!-- Про чай -->
-  <section id="about">
-    <div class="container text-center">
-      <h2 class="mb-4">Про нашу крамницю</h2>
-      <p class="lead mx-auto" style="max-width:800px;">
-        Ми привозимо лише автентичний китайський чай без ароматизаторів — з малих плантацій, де кожен листочок зібрано вручну.  
-        Наші чаї — це історія, культура і мистецтво у кожній чашці.
-      </p>
+<section id="about">
+  <div class="container text-center">
+    <h2 class="mb-4">Про нашу крамницю</h2>
+    <p class="lead mx-auto" style="max-width:800px;">
+      Ми привозимо лише автентичний китайський чай без ароматизаторів — з малих плантацій, де кожен листочок зібрано вручну.  
+      Наші чаї — це історія, культура і мистецтво у кожній чашці.
+    </p>
+
+    <!-- Підзаголовок для блоку посилань -->
+    <h4 class="mt-5 mb-4" style="color:#561a26; font-weight:600;">
+      ☕ Цікаво дізнатись більше про правильне приготування чаю? Обери статтю нижче:
+    </h4>
+
+    <!-- Новий блок із посиланнями -->
+    <div class="row mt-4 g-4 justify-content-center">
+      <div class="col-md-5">
+        <a href="https://kokl.ua/yak-pravylno-zavaryuvaty-chaj-sekrety-idealnogo-smaku/" target="_blank" class="tea-link">
+          <div class="card tea-card">
+            <img src="https://kokl.ua/wp-content/uploads/2025/10/yak-pravylno-zavaryuvaty-chaj.jpg" class="card-img-top" alt="Як правильно заварювати чай">
+            <div class="card-body">
+              <h5 class="card-title">Як правильно заварювати чай</h5>
+              <p class="card-text">Секрети ідеального смаку та стародавні традиції приготування чаю.</p>
+              <p class="text-end text-muted small mt-2">🔗 Натисни, щоб прочитати</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-5">
+        <a href="https://vikna.tv/styl-zhyttya/yak-pravylno-zavaryuvaty-chaj/" target="_blank" class="tea-link">
+          <div class="card tea-card">
+            <img src="https://vikna.tv/wp-content/uploads/2024/05/30/cdtgn.jpg" class="card-img-top" alt="Секрети заварювання чаю">
+            <div class="card-body">
+              <h5 class="card-title">Секрети заварювання чаю</h5>
+              <p class="card-text">Дізнайся, як розкрити аромат і смак чаю на 100%.</p>
+              <p class="text-end text-muted small mt-2">🔗 Натисни, щоб прочитати</p>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Популярні сорти -->
   <section id="products" class="py-5">
@@ -371,4 +452,5 @@
   </script>
 </body>
 </html>
+
 
