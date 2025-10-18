@@ -318,30 +318,60 @@
 
   <!-- Відгуки -->
   <section id="reviews" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center mb-5">Відгуки наших клієнтів</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="testimonial">
-            <p>"Неймовірний аромат і смак! Тепер чай — це справжній ритуал."</p>
-            <p><strong>- Ірина К.</strong></p>
+  <div class="container">
+    <h2 class="text-center mb-5">Відгуки наших клієнтів</h2>
+
+    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        
+        <div class="carousel-item active">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="testimonial text-center">
+                <p style="font-size: 1.1rem; line-height: 1.6;">"Неймовірний аромат і смак! Тепер чай — це справжній ритуал, а не просто гарячий напій. Відчувається якість!"</p>
+                <p class="mt-3"><strong>- Ангеліна М.</strong></p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="testimonial">
-            <p>"Купував Пуер — якість чудова, доставка швидка. Рекомендую!"</p>
-            <p><strong>- Олег М.</strong></p>
+        
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="testimonial text-center">
+                <p style="font-size: 1.1rem; line-height: 1.6;">"Купував Пуер — якість чудова, доставка швидка. Рекомендую всім поціновувачам справжнього чаю!"</p>
+                <p class="mt-3"><strong>- Микола М.</strong></p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="testimonial">
-            <p>"Сервіс, пакування і чай — на найвищому рівні."</p>
-            <p><strong>- Марія Л.</strong></p>
+        
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="testimonial text-center">
+                <p style="font-size: 1.1rem; line-height: 1.6;">"Сервіс, пакування і сам чай — на найвищому рівні. Дякую за мій улюблений Те Гуань Інь!"</p>
+                <p class="mt-3"><strong>- Юля Л.</strong></p>
+              </div>
+            </div>
           </div>
         </div>
+        
       </div>
+      
+      <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+        <span class="visually-hidden">Попередня</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+        <span class="visually-hidden">Наступна</span>
+      </button>
+      
     </div>
-  </section>
+    
+  </div>
+</section>
 
   <!-- CTA -->
   <section class="cta" id="cta">
@@ -608,6 +638,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 </body>
 </html>
+
 
 
 
