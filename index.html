@@ -466,8 +466,149 @@
       }
     });
   </script>
+	<section id="quiz" class="py-5" style="background-color: #f3efe7;">
+  <div class="container text-center">
+    <h2 class="mb-4" style="color:#561a26;">Не знаєте, що обрати?</h2>
+    <p class="lead">Пройдіть наш швидкий тест і ми порекомендуємо вам ідеальний сорт! 🍵</p>
+    <a href="#" class="btn-view mt-3" data-bs-toggle="modal" data-bs-target="#teaQuizModal" style="background-color: #561a26; color: white;">
+      Розпочати тест
+    </a>
+  </div>
+</section>
+
+<div class="modal fade" id="teaQuizModal" tabindex="-1" aria-labelledby="teaQuizModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none;">
+        <h5 class="modal-title" id="teaQuizModalLabel" style="color: #561a26;">Чайний Гід: Крок <span id="currentStep">1</span> з 3</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        
+        <div class="quiz-step active" data-step="1">
+          <h4 class="mb-4">Який ефект ви шукаєте?</h4>
+          <button type="button" class="btn btn-lg btn-outline-secondary quiz-button" data-score="2" data-next="2">Бадьорість та концентрація 🚀</button>
+          <button type="button" class="btn btn-lg btn-outline-secondary quiz-button" data-score="1" data-next="2">Розслаблення та спокій 🧘</button>
+        </div>
+
+        <div class="quiz-step" data-step="2">
+          <h4 class="mb-4">Яка інтенсивність смаку вам до вподоби?</h4>
+          <button type="button" class="btn btn-lg btn-outline-secondary quiz-button" data-score="2" data-next="3">Насичений, земляний, міцний</button>
+          <button type="button" class="btn btn-lg btn-outline-secondary quiz-button" data-score="1" data-next="3">Легкий, квітковий, свіжий</button>
+        </div>
+
+        <div class="quiz-step" data-step="3">
+          <h4 class="mb-4">Коли ви плануєте пити чай?</h4>
+          <button type="button" class="btn btn-lg btn-outline-secondary quiz-button" data-score="2" data-next="finish">Вранці/вдень (для енергії)</button>
+          <button type="button" class="btn btn-lg btn-outline-secondary quiz-button" data-score="1" data-next="finish">Увечері/після обіду (для травлення)</button>
+        </div>
+
+      </div>
+      <div class="modal-footer" style="border-top: none; justify-content: center;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none;">
+        <h5 class="modal-title" id="resultModalLabel" style="color: #561a26;">Ваш ідеальний чай знайдено!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center py-4">
+        <h4 class="mb-3">Ми рекомендуємо: <span id="recommendedTeaName" style="color: #561a26 !important; font-weight: 700;">[Назва чаю]</span></h4>
+        <p id="recommendedTeaDesc" class="lead">[Опис чаю]</p>
+        <a href="#products" class="btn btn-quiz-result btn-lg mt-3" data-bs-dismiss="modal" id="resultOrderBtn">Перейти до товару</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const teaQuizModal = new bootstrap.Modal(document.getElementById('teaQuizModal'));
+  const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+  const quizSteps = document.querySelectorAll('.quiz-step');
+  const quizButtons = document.querySelectorAll('.quiz-button');
+  const currentStepIndicator = document.getElementById('currentStep');
+  let currentStep = 1;
+  let totalScore = 0;
+
+  // Рекомендації на основі балів
+  const recommendations = {
+      low: {
+          name: "Лунцзін (Зелений чай)",
+          desc: "Ви цінуєте легкість, свіжість та квіткові нотки. Цей чай ідеально підійде для розслаблюючого вечора або м'якого початку дня.",
+          target: "#products"
+      },
+      medium: {
+          name: "Те Гуань Інь (Світлий Улун)",
+          desc: "Вам подобається гармонія: і легкий квітковий аромат, і м'яка бадьорість. Ідеальний баланс для щоденного вживання.",
+          target: "#products"
+      },
+      high: {
+          name: "Пуер Шу (Ферментований чорний чай)",
+          desc: "Ви шукаєте сильний смак, бадьорість та стійкий, насичений післясмак. Ідеально замінить ранкову каву!",
+          target: "#products"
+      }
+  };
+
+  // Перехід між кроками
+  function nextStep(score, nextStepKey) {
+      totalScore += parseInt(score);
+      document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.remove('active');
+
+      if (nextStepKey === 'finish') {
+          showResult();
+      } else {
+          currentStep = parseInt(nextStepKey);
+          document.querySelector(`.quiz-step[data-step="${currentStep}"]`).classList.add('active');
+          currentStepIndicator.textContent = currentStep;
+      }
+  }
+
+  // Показ результатів
+  function showResult() {
+      teaQuizModal.hide();
+      let recommendation;
+      if (totalScore >= 6) {
+          recommendation = recommendations.high;
+      } else if (totalScore === 5) {
+          recommendation = recommendations.medium;
+      } else {
+          recommendation = recommendations.low;
+      }
+
+      document.getElementById('recommendedTeaName').textContent = recommendation.name;
+      document.getElementById('recommendedTeaDesc').textContent = recommendation.desc;
+      document.getElementById('resultOrderBtn').setAttribute('href', recommendation.target);
+
+      setTimeout(() => resultModal.show(), 300);
+  }
+
+  // Клік по кнопках відповідей
+  quizButtons.forEach(button => {
+      button.addEventListener('click', function () {
+          const score = this.getAttribute('data-score');
+          const next = this.getAttribute('data-next');
+          nextStep(score, next);
+      });
+  });
+
+  // Скидання тесту при закритті
+  document.getElementById('teaQuizModal').addEventListener('hidden.bs.modal', function () {
+      currentStep = 1;
+      totalScore = 0;
+      currentStepIndicator.textContent = 1;
+      quizSteps.forEach(step => step.classList.remove('active'));
+      document.querySelector('.quiz-step[data-step="1"]').classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
+
 
 
 
