@@ -636,8 +636,31 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+	<script>
+  // Коли сторінка завантажиться
+  document.addEventListener("DOMContentLoaded", function () {
+    // Знаходимо всі кнопки "Замовити"
+    const orderButtons = document.querySelectorAll('.btn-order');
+
+    orderButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const productName = this.closest('.product').querySelector('h4').textContent.trim();
+
+        // Відправляємо подію до Google Analytics
+        gtag('event', 'click_order_button', {
+          event_category: 'Tea Products',
+          event_label: productName,
+          value: 1
+        });
+
+        console.log("GA event sent for:", productName);
+      });
+    });
+  });
+</script>
 </body>
 </html>
+
 
 
 
